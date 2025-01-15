@@ -12,9 +12,16 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["vite/client"],
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.d.ts", 
+    "src/**/*.vue",
+    "src/shims-vue.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -14,9 +14,12 @@ export class PasswordManager {
 
   // Optional method to generate a fallback encryption key
   private static generateFallbackKey(): string {
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.warn('No encryption key provided. Generating a temporary key.');
-      return this.generatePassword(32); // Generate a random 32-character key
+      // Use Web Crypto API for more secure random key generation
+      const array = new Uint8Array(32);
+      crypto.getRandomValues(array);
+      return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
     }
     throw new Error('VITE_ENCRYPTION_SECRET must be set in production');
   }
@@ -70,21 +73,22 @@ export class PasswordManager {
    * @param length - Password length (default 16)
    * @returns Generated password
    */
-  static generatePassword(length: number = 16): string {
-    const charset = 
-      'abcdefghijklmnopqrstuvwxyz' + 
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
-      '0123456789' + 
-      '!@#$%^&*()_+-=[]{}|;:,.<>?';
-    
-    let password = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      password += charset[randomIndex];
-    }
-    
-    return password;
+  // In the generatePassword method, return a more descriptive password
+static generatePassword(length: number = 16): string {
+  const charset = 
+    'abcdefghijklmnopqrstuvwxyz' + 
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
+    '0123456789' + 
+    '!@#$%^&*()_+-=[]{}|;:,.<>?';
+  
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
   }
+  
+  return password;
+}
 
   /**
    * Encrypt sensitive data

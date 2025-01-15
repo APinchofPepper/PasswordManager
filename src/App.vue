@@ -6,7 +6,7 @@ import PasswordManager from './components/PasswordManager.vue'
 <template>
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold text-center mb-6">
-      Password Strength Manager
+      Secure Password Manager
     </h1>
     <PasswordManager />
     <RouterView />
