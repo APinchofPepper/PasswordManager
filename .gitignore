@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies and build
 node_modules
 .DS_Store
 dist
@@ -14,6 +15,7 @@ dist-ssr
 coverage
 *.local
 
+# Testing
 /cypress/videos/
 /cypress/screenshots/
 
@@ -27,4 +29,36 @@ coverage
 *.sln
 *.sw?
 
+# TypeScript
 *.tsbuildinfo
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local storage and user data
+localStorage/
+userdata/
+*.store.json
+credentials.json
+user_data/
+
+# Security and keys
+*.pem
+*.key
+*.cert
+*.crt
+private/
+secrets/
+
+# Debug and temporary files
+debug/
+.temp/
+tmp/
+*.tmp
+*.bak
+
+# IDE specific files
+.history/
+*.code-workspace

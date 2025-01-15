@@ -73,22 +73,21 @@ export class PasswordManager {
    * @param length - Password length (default 16)
    * @returns Generated password
    */
-  // In the generatePassword method, return a more descriptive password
-static generatePassword(length: number = 16): string {
-  const charset = 
-    'abcdefghijklmnopqrstuvwxyz' + 
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
-    '0123456789' + 
-    '!@#$%^&*()_+-=[]{}|;:,.<>?';
-  
-  let password = '';
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * charset.length);
-    password += charset[randomIndex];
+  static generatePassword(length: number = 16): string {
+    const charset = 
+      'abcdefghijklmnopqrstuvwxyz' + 
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
+      '0123456789' + 
+      '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    
+    let password = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+    
+    return password;
   }
-  
-  return password;
-}
 
   /**
    * Encrypt sensitive data
@@ -113,25 +112,5 @@ static generatePassword(length: number = 16): string {
     }
     const bytes = CryptoJS.AES.decrypt(encryptedData, this.ENCRYPTION_KEY);
     return bytes.toString(CryptoJS.enc.Utf8);
-  }
-
-  /**
-   * Securely store password in local storage
-   * @param key - Storage key
-   * @param password - Password to store
-   */
-  static storePassword(key: string, password: string): void {
-    const encryptedPassword = this.encrypt(password);
-    localStorage.setItem(key, encryptedPassword);
-  }
-
-  /**
-   * Retrieve stored password
-   * @param key - Storage key
-   * @returns Decrypted password
-   */
-  static retrievePassword(key: string): string | null {
-    const encryptedPassword = localStorage.getItem(key);
-    return encryptedPassword ? this.decrypt(encryptedPassword) : null;
   }
 }

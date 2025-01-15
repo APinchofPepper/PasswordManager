@@ -13,14 +13,22 @@
     "noEmit": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["vite/client"],
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "types": [
+      "vite/client", 
+      "zxcvbn", 
+      "crypto-js"
+    ],
+    "typeRoots": [
+      "./node_modules/@types", 
+      "./src/types"
+    ]
   },
   "include": [
     "src/**/*.ts", 
     "src/**/*.d.ts", 
     "src/**/*.vue",
-    "src/shims-vue.d.ts"
+    "src/shims-vue.d.ts",
+    "src/types/*.d.ts"
   ],
   "references": [
     {
